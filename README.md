@@ -33,7 +33,6 @@ A professional **Invoice Management System** built with Laravel. This system all
 
 > Add screenshots of the main pages (Dashboard, Invoice List, Create Invoice, Reports, etc.)
 
-```
 ![Dashboard](screenshots/dashboard.png)
 ![Dashboard](screenshots/all_invoices.png)
 ![Dashboard](screenshots/add_invoice.png)
@@ -46,14 +45,6 @@ A professional **Invoice Management System** built with Laravel. This system all
 ![Dashboard](screenshots/users.png)
 ![Dashboard](screenshots/departments.png)
 ![Dashboard](screenshots/products.png)
-```
-
-## 🎥 Demo Video
-
-> Upload your video to YouTube or any hosting platform and add the link below:
-
-[Watch Demo on YouTube](https://your-video-link.com)
-
 
 ## 📂 Installation
 
