@@ -1,69 +1,102 @@
+
 # Invoice Management System
 
-## Overview
-This is a **Laravel-based Invoice Management System** that helps businesses manage invoices efficiently. It includes features for invoice creation, editing, viewing, and generating PDF reports.
+A professional **Invoice Management System** built with Laravel. This system allows users to create, manage, and print invoices with ease. It also includes features such as user permissions, reports, notifications, and client management.
 
-## Features
-- User authentication (Login/Register)
-- Invoice creation and management
-- PDF generation for invoices
-- Client management
-- Role-based access control
-- Reports and statistics
+> 🔸 *Note: The application interface is currently available in Arabic only.*
 
-## Installation
-### 1. Clone the Repository
-```bash
-git clone https://github.com/AtefHejazi/invoice-system.git
-cd invoice-system
+## 🚀 Features
+
+- 🧾 Create, edit, and delete invoices
+- 📁 Manage sections and products
+- 👥 Manage clients and users
+- 🧑‍💼 Role-based access control (Admin / User)
+- 📊 Generate detailed reports (paid / unpaid / partially paid)
+- 🔔 Notifications for invoice status
+- 📌 Archive and restore invoices
+- 🖨️ Print invoices
+- 📤 Export data to Excel
+- 📥 Upload and manage attachments
+- 📚 Comprehensive invoice history and logs
+- 🔐 Secure authentication and access control
+
+## 🛠️ Technologies Used
+
+- **Laravel** (Latest version)
+- **Bootstrap 5**
+- **MySQL**
+- **AJAX**
+- **Blade Templating**
+- **Spatie Permissions Package**
+
+## 📸 Screenshots
+
+> Add screenshots of the main pages (Dashboard, Invoice List, Create Invoice, Reports, etc.)
+
+```
+![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/all_invoices.png)
+![Dashboard](screenshots/add_invoice.png)
+![Dashboard](screenshots/all_invoices2.png)
+![Dashboard](screenshots/search about invoice.png)
+![Dashboard](screenshots/serach about invoice 2.png)
+![Dashboard](screenshots/search about invoice 3.png)
+![Dashboard](screenshots/users_perm.png)
+![Dashboard](screenshots/permisitions.png)
+![Dashboard](screenshots/users.png)
+![Dashboard](screenshots/departments.png)
+![Dashboard](screenshots/products.png)
 ```
 
-### 2. Install Dependencies
-```bash
-composer install
-npm install
-```
+## 🎥 Demo Video
 
-### 3. Configure Environment
-Copy the `.env.example` file and update the necessary environment variables:
-```bash
-cp .env.example .env
-```
-Then, generate the application key:
-```bash
-php artisan key:generate
-```
+> Upload your video to YouTube or any hosting platform and add the link below:
 
-### 4. Set Up Database
-Create a new database and update `.env` file with the database credentials:
-```env
-DB_DATABASE=your_database_name
-DB_USERNAME=your_database_user
-DB_PASSWORD=your_database_password
-```
-Run migrations and seed data:
-```bash
-php artisan migrate --seed
-```
+[Watch Demo on YouTube](https://your-video-link.com)
 
-### 5. Run the Application
-```bash
-php artisan serve
-```
-Visit `http://127.0.0.1:8000` in your browser.
 
-## Usage
-- Register or log in as an admin.
-- Add clients and create invoices.
-- Manage payments and generate reports.
-- Download invoices as PDFs.
+## 📂 Installation
 
-## Contributing
-If you'd like to contribute, feel free to fork this repository and submit a pull request.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/atefhejazi1/invoices.git
+   ```
 
-## License
-This project is licensed under the **MIT License**.
+2. Install dependencies:
+   ```bash
+   composer install
+   npm install && npm run dev
+   ```
+
+3. Create a `.env` file:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Generate application key:
+   ```bash
+   php artisan key:generate
+   ```
+
+5. Setup the database and run migrations:
+   ```bash
+   php artisan migrate --seed
+   ```
+
+6. Start the server:
+   ```bash
+   php artisan serve
+   ```
+
+7. Done! Open your browser at `http://localhost:8000`
+
+## 📧 Contact
+
+For any questions or suggestions, feel free to reach out to me:
+
+- 💼 [Upwork Profile](https://www.upwork.com/freelancers/~019155515c3b5d1ea4)
+- 💻 [LinkedIn](https://www.linkedin.com/in/atefhejazi)
 
 ---
-**Author:** Atef Hejazi  
-**GitHub:** [AtefHejazi](https://github.com/atefhejazi1)
+
+📌 *This project was created as part of a Laravel training journey to build real-world, professional applications.*
