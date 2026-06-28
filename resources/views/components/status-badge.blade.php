@@ -2,11 +2,11 @@
 
 @php
     $map = [
-        1 => ['bg-success', 'مدفوعة'],
-        2 => ['bg-danger', 'غير مدفوعة'],
-        3 => ['bg-warning text-dark', 'مدفوعة جزئياً'],
+        1 => ['status-pill-success', 'مدفوعة'],
+        2 => ['status-pill-danger', 'غير مدفوعة'],
+        3 => ['status-pill-warning', 'مدفوعة جزئياً'],
     ];
-    [$class, $label] = $map[(int) $status] ?? ['bg-secondary', 'غير محدد'];
+    [$class, $label] = $map[(int) $status] ?? ['status-pill-secondary', 'غير محدد'];
 @endphp
 
 <span class="badge rounded-pill {{ $class }} status-badge">{{ $label }}</span>

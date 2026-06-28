@@ -65,13 +65,14 @@ class HomeController extends Controller
             ->labels(['مدفوعة', 'غير مدفوعة', 'مدفوعة جزئياً'])
             ->datasets([
                 [
-                    'backgroundColor' => ['#22c03c', '#ee335e', '#fbbc0b'],
+                    'backgroundColor' => ['#1fa971', '#e5484d', '#f5a524'],
+                    'borderWidth' => 0,
                     'data' => [$count_invoices1, $count_invoices2, $count_invoices3],
                 ],
             ])
             ->options([
-                'cutoutPercentage' => 65,
-                'legend' => ['position' => 'bottom'],
+                'cutoutPercentage' => 68,
+                'legend' => ['display' => false],
             ]);
 
         $revenueTrendChart = app()->chartjs
@@ -82,8 +83,8 @@ class HomeController extends Controller
             ->datasets([
                 [
                     'label' => 'الايرادات',
-                    'backgroundColor' => 'rgba(1, 98, 232, .12)',
-                    'borderColor' => '#0162e8',
+                    'backgroundColor' => 'rgba(59, 111, 224, .12)',
+                    'borderColor' => '#3b6fe0',
                     'data' => $trendData,
                     'fill' => true,
                     'tension' => 0.35,

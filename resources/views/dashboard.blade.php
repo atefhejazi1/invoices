@@ -74,63 +74,21 @@
     </div>
     <!-- /slim stats strip -->
 
-    <!-- chart-first row -->
-    <div class="row row-sm">
-        <div class="col-lg-7">
-            <div class="card">
-                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0">اتجاه الايرادات (آخر 6 أشهر)</h4>
-                </div>
-                <div class="card-body">
-                    {!! $revenueTrendChart->render() !!}
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-5">
-            <div class="card">
-                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0">توزيع حالات الفواتير</h4>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-center mb-3">
-                        {!! $chartjs->render() !!}
-                    </div>
-                    <div class="d-flex flex-column gap-2">
-                        <div class="d-flex justify-content-between align-items-center status-legend-row">
-                            <span><span class="legend-dot bg-success"></span> مدفوعة</span>
-                            <strong>{{ $count_invoices1 }}</strong>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center status-legend-row">
-                            <span><span class="legend-dot bg-danger"></span> غير مدفوعة</span>
-                            <strong>{{ $count_invoices2 }}</strong>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center status-legend-row">
-                            <span><span class="legend-dot bg-warning"></span> مدفوعة جزئياً</span>
-                            <strong>{{ $count_invoices3 }}</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /chart-first row -->
-
-    <!-- overdue + leaderboard row -->
-    <div class="row row-sm">
-        <div class="col-lg-7">
-            <div class="card">
+    <!-- overdue + leaderboard row (urgent items surfaced right after stats) -->
+    <div class="row row-sm g-4 mb-4">
+        <div class="col-lg-8">
+            <div class="card h-100">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
                     <h4 class="card-title mb-0">
-                        فواتير متأخرة
+                        <i class="fas fa-exclamation-triangle text-danger me-2"></i>فواتير متأخرة
                         @if ($overdueCount > 0)
-                            <span class="badge bg-danger rounded-pill ms-2">{{ $overdueCount }}</span>
+                            <span class="badge rounded-pill status-pill-danger status-badge ms-2">{{ $overdueCount }}</span>
                         @endif
                     </h4>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table mb-0 table-hover">
+                        <table class="table table-modern mb-0 table-hover">
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">رقم الفاتورة</th>
@@ -149,7 +107,7 @@
                                         </td>
                                         <td>{{ $invoice->section->section_name ?? '-' }}</td>
                                         <td>{{ $invoice->Due_date }}</td>
-                                        <td><span class="text-danger">{{ now()->diffInDays($invoice->Due_date) }} يوم</span></td>
+                                        <td><span class="text-danger fw-bold">{{ abs((int) now()->diffInDays($invoice->Due_date, true)) }} يوم</span></td>
                                         <td>{{ number_format($invoice->Total, 2) }}</td>
                                         <td><x-status-badge :status="$invoice->Value_Status" /></td>
                                     </tr>
@@ -165,10 +123,10 @@
             </div>
         </div>
 
-        <div class="col-lg-5">
-            <div class="card">
+        <div class="col-lg-4">
+            <div class="card h-100">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0">أعلى الأقسام إيرادًا</h4>
+                    <h4 class="card-title mb-0"><i class="fas fa-trophy text-warning me-2"></i>أعلى الأقسام إيرادًا</h4>
                 </div>
                 <div class="card-body">
                     @forelse ($topSections as $i => $row)
@@ -190,17 +148,59 @@
     </div>
     <!-- /overdue + leaderboard row -->
 
+    <!-- chart row (analytics, below the actionable items) -->
+    <div class="row row-sm g-4 mb-4">
+        <div class="col-lg-7">
+            <div class="card h-100">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                    <h4 class="card-title mb-0"><i class="fas fa-chart-line text-primary me-2"></i>اتجاه الايرادات (آخر 6 أشهر)</h4>
+                </div>
+                <div class="card-body chart-card-body">
+                    {!! $revenueTrendChart->render() !!}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card h-100">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                    <h4 class="card-title mb-0"><i class="fas fa-chart-pie text-info me-2"></i>توزيع حالات الفواتير</h4>
+                </div>
+                <div class="card-body chart-card-body">
+                    <div class="donut-chart-wrap">
+                        {!! $chartjs->render() !!}
+                    </div>
+                    <div class="d-flex flex-column gap-2 status-legend-list">
+                        <div class="d-flex justify-content-between align-items-center status-legend-row">
+                            <span><span class="legend-dot bg-success"></span> مدفوعة</span>
+                            <strong>{{ $count_invoices1 }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center status-legend-row">
+                            <span><span class="legend-dot bg-danger"></span> غير مدفوعة</span>
+                            <strong>{{ $count_invoices2 }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center status-legend-row">
+                            <span><span class="legend-dot bg-warning"></span> مدفوعة جزئياً</span>
+                            <strong>{{ $count_invoices3 }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /chart row -->
+
     <!-- recent invoices, full width -->
-    <div class="row row-sm">
+    <div class="row row-sm g-4 mb-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0">أحدث الفواتير</h4>
+                    <h4 class="card-title mb-0"><i class="fas fa-history text-secondary me-2"></i>أحدث الفواتير</h4>
                     <a href="{{ url('invoices') }}" class="btn btn-sm btn-outline-primary">عرض الكل</a>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table mb-0 table-hover">
+                        <table class="table table-modern mb-0 table-hover">
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">رقم الفاتورة</th>
