@@ -8,6 +8,7 @@ use App\Http\Controllers\InvoicesArchiveController;
 use App\Http\Controllers\InvoicesAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -15,9 +16,7 @@ use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

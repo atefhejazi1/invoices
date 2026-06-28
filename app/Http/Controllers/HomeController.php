@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\invoices;
+use App\Models\sections;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    private const ARABIC_MONTHS = [
+        'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر',
+    ];
+
     /**
      * Show the application dashboard.
      *
@@ -14,75 +20,93 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        //=================احصائية نسبة تنفيذ الحالات======================
-
-
-
         $count_all = invoices::count();
         $count_invoices1 = invoices::where('Value_Status', 1)->count();
         $count_invoices2 = invoices::where('Value_Status', 2)->count();
         $count_invoices3 = invoices::where('Value_Status', 3)->count();
+        $totalSections = sections::count();
+        $totalRevenue = invoices::sum('Total');
+        $recentInvoices = invoices::latest()->take(8)->get();
 
-        if ($count_invoices2 == 0) {
-            $nspainvoices2 = 0;
-        } else {
-            $nspainvoices2 = $count_invoices2 / $count_all * 100;
+        $overdueInvoices = invoices::where('Due_date', '<', now())
+            ->where('Value_Status', '!=', 1)
+            ->orderBy('Due_date')
+            ->take(8)
+            ->get();
+        $overdueCount = invoices::where('Due_date', '<', now())
+            ->where('Value_Status', '!=', 1)
+            ->count();
+
+        $topSections = invoices::selectRaw('section_id, SUM(Total) as revenue')
+            ->groupBy('section_id')
+            ->orderByDesc('revenue')
+            ->take(5)
+            ->with('section')
+            ->get();
+        $maxSectionRevenue = $topSections->max('revenue') ?: 1;
+
+        $trendLabels = [];
+        $trendData = [];
+        for ($i = 5; $i >= 0; $i--) {
+            $month = now()->subMonths($i);
+            $trendLabels[] = self::ARABIC_MONTHS[$month->month - 1];
+            $trendData[] = round(
+                invoices::whereYear('invoice_Date', $month->year)
+                    ->whereMonth('invoice_Date', $month->month)
+                    ->sum('Total'),
+                2
+            );
         }
-
-        if ($count_invoices1 == 0) {
-            $nspainvoices1 = 0;
-        } else {
-            $nspainvoices1 = $count_invoices1 / $count_all * 100;
-        }
-
-        if ($count_invoices3 == 0) {
-            $nspainvoices3 = 0;
-        } else {
-            $nspainvoices3 = $count_invoices3 / $count_all * 100;
-        }
-
 
         $chartjs = app()->chartjs
-            ->name('barChartTest')
-            ->type('bar')
-            ->size(['width' => 350, 'height' => 200])
-            ->labels(['الفواتير الغير المدفوعة', 'الفواتير المدفوعة', 'الفواتير المدفوعة جزئيا'])
+            ->name('statusDistributionChart')
+            ->type('doughnut')
+            ->size(['width' => 320, 'height' => 280])
+            ->labels(['مدفوعة', 'غير مدفوعة', 'مدفوعة جزئياً'])
             ->datasets([
                 [
-                    "label" => "الفواتير الغير المدفوعة",
-                    'backgroundColor' => ['#ec5858'],
-                    'data' => [$nspainvoices2]
+                    'backgroundColor' => ['#22c03c', '#ee335e', '#fbbc0b'],
+                    'data' => [$count_invoices1, $count_invoices2, $count_invoices3],
                 ],
-                [
-                    "label" => "الفواتير المدفوعة",
-                    'backgroundColor' => ['#81b214'],
-                    'data' => [$nspainvoices1]
-                ],
-                [
-                    "label" => "الفواتير المدفوعة جزئيا",
-                    'backgroundColor' => ['#ff9642'],
-                    'data' => [$nspainvoices3]
-                ],
-
-
             ])
-            ->options([]);
+            ->options([
+                'cutoutPercentage' => 65,
+                'legend' => ['position' => 'bottom'],
+            ]);
 
-
-        $chartjs_2 = app()->chartjs
-            ->name('pieChartTest')
-            ->type('pie')
-            ->size(['width' => 340, 'height' => 200])
-            ->labels(['الفواتير الغير المدفوعة', 'الفواتير المدفوعة', 'الفواتير المدفوعة جزئيا'])
+        $revenueTrendChart = app()->chartjs
+            ->name('revenueTrendChart')
+            ->type('line')
+            ->size(['width' => 600, 'height' => 260])
+            ->labels($trendLabels)
             ->datasets([
                 [
-                    'backgroundColor' => ['#ec5858', '#81b214', '#ff9642'],
-                    'data' => [$nspainvoices2, $nspainvoices1, $nspainvoices3]
-                ]
+                    'label' => 'الايرادات',
+                    'backgroundColor' => 'rgba(1, 98, 232, .12)',
+                    'borderColor' => '#0162e8',
+                    'data' => $trendData,
+                    'fill' => true,
+                    'tension' => 0.35,
+                ],
             ])
-            ->options([]);
+            ->options([
+                'legend' => ['display' => false],
+            ]);
 
-        return view('dashboard', compact('chartjs', 'chartjs_2'));
+        return view('dashboard', compact(
+            'chartjs',
+            'revenueTrendChart',
+            'count_all',
+            'count_invoices1',
+            'count_invoices2',
+            'count_invoices3',
+            'totalSections',
+            'totalRevenue',
+            'recentInvoices',
+            'overdueInvoices',
+            'overdueCount',
+            'topSections',
+            'maxSectionRevenue'
+        ));
     }
 }

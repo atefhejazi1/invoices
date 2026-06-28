@@ -107,13 +107,7 @@
                                         <td>{{ $invoice->Value_VAT }}</td>
                                         <td>{{ $invoice->Total }}</td>
                                         <td>
-                                            @if ($invoice->Value_Status == 1)
-                                                <span class="text-success">{{ $invoice->Status }}</span>
-                                            @elseif($invoice->Value_Status == 2)
-                                                <span class="text-danger">{{ $invoice->Status }}</span>
-                                            @else
-                                                <span class="text-warning">{{ $invoice->Status }}</span>
-                                            @endif
+                                            <x-status-badge :status="$invoice->Value_Status" />
 
                                         </td>
 

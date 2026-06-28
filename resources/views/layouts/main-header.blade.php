@@ -236,6 +236,12 @@
                     </div>
 
                 @endcan
+                <div class="nav-item">
+                    <a class="new nav-link" href="#" id="themeToggle" title="تبديل الوضع الليلي">
+                        <i class="fas fa-moon theme-icon-dark"></i>
+                        <i class="fas fa-sun theme-icon-light" style="display:none"></i>
+                    </a>
+                </div>
                 <div class="nav-item full-screen fullscreen-button">
                     <a class="new nav-link full-screen-link" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor"

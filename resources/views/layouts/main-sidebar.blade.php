@@ -67,7 +67,12 @@
 
                         @can('الفواتير الغير مدفوعة')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_UnPaid')) }}">الفواتير
-                                    الغيرمدفوعة</a>
+                                    الغيرمدفوعة
+                                    @php($unpaidCount = \App\Models\invoices::where('Value_Status', 2)->count())
+                                    @if ($unpaidCount > 0)
+                                        <span class="nav-count-badge">{{ $unpaidCount }}</span>
+                                    @endif
+                                </a>
                             </li>
                         @endcan
 

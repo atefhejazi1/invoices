@@ -1,7 +1,7 @@
 
 # Invoice Management System
 
-A professional **Invoice Management System** built with Laravel. This system allows users to create, manage, and print invoices with ease. It also includes features such as user permissions, reports, notifications, and client management.
+A production-ready invoice management system built with Laravel. This system allows users to create, manage, and print invoices with ease. It also includes features such as user permissions, reports, notifications, and client management.
 
 > 🔸 *Note: The application interface is currently available in Arabic only.*
 
@@ -29,22 +29,18 @@ A professional **Invoice Management System** built with Laravel. This system all
 - **Blade Templating**
 - **Spatie Permissions Package**
 
+## 🌐 Live Demo
+
+[Live Demo](#) — coming soon
+
+### Demo Credentials
+
+- **Email:** admin@demo.com
+- **Password:** password
+
 ## 📸 Screenshots
 
-> Add screenshots of the main pages (Dashboard, Invoice List, Create Invoice, Reports, etc.)
-
-![Dashboard](screenshots/dashboard.png)
-![Dashboard](screenshots/all_invoices.png)
-![Dashboard](screenshots/add_invoice.png)
-![Dashboard](screenshots/all_invoices2.png)
-![Dashboard](screenshots/search_about_invoice.png)
-![Dashboard](screenshots/serach_about_invoice2.png)
-![Dashboard](screenshots/search_about_invoice3.png)
-![Dashboard](screenshots/users_perm.png)
-![Dashboard](screenshots/permisitions.png)
-![Dashboard](screenshots/users.png)
-![Dashboard](screenshots/departments.png)
-![Dashboard](screenshots/products.png)
+> Fresh screenshots of the redesigned UI coming soon.
 
 ## 📂 Installation
 
@@ -90,4 +86,4 @@ For any questions or suggestions, feel free to reach out to me:
 
 ---
 
-📌 *This project was created as part of a Laravel training journey to build real-world, professional applications.*
+📌 *A production-ready invoice management system built with Laravel.*

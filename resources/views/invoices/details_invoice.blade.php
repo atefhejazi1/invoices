@@ -121,19 +121,7 @@
                                                             <td>{{ $invoices->Total }}</td>
                                                             <th scope="row">الحالة الحالية</th>
 
-                                                            @if ($invoices->Value_Status == 1)
-                                                                <td><span
-                                                                        class="badge badge-pill badge-success">{{ $invoices->Status }}</span>
-                                                                </td>
-                                                            @elseif($invoices->Value_Status == 2)
-                                                                <td><span
-                                                                        class="badge badge-pill badge-danger">{{ $invoices->Status }}</span>
-                                                                </td>
-                                                            @else
-                                                                <td><span
-                                                                        class="badge badge-pill badge-warning">{{ $invoices->Status }}</span>
-                                                                </td>
-                                                            @endif
+                                                            <td><x-status-badge :status="$invoices->Value_Status" /></td>
                                                         </tr>
 
                                                         <tr>
@@ -172,19 +160,7 @@
                                                                 <td>{{ $x->invoice_number }}</td>
                                                                 <td>{{ $x->product }}</td>
                                                                 <td>{{ $invoices->Section->section_name }}</td>
-                                                                @if ($x->Value_Status == 1)
-                                                                    <td><span
-                                                                            class="badge badge-pill badge-success">{{ $x->Status }}</span>
-                                                                    </td>
-                                                                @elseif($x->Value_Status == 2)
-                                                                    <td><span
-                                                                            class="badge badge-pill badge-danger">{{ $x->Status }}</span>
-                                                                    </td>
-                                                                @else
-                                                                    <td><span
-                                                                            class="badge badge-pill badge-warning">{{ $x->Status }}</span>
-                                                                    </td>
-                                                                @endif
+                                                                <td><x-status-badge :status="$x->Value_Status" /></td>
                                                                 <td>{{ $x->Payment_Date }}</td>
                                                                 <td>{{ $x->note }}</td>
                                                                 <td>{{ $x->created_at }}</td>

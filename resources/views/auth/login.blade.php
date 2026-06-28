@@ -9,6 +9,7 @@
     <!-- Sidemenu-respoansive-tabs css -->
     <link href="{{ URL::asset('assets/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css') }}"
         rel="stylesheet">
+    <link href="{{ URL::asset('css/auth.css') }}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -21,8 +22,8 @@
                     <div class="container p-0">
                         <div class="row">
                             <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
-                                <div class="card-sigin">
-                                    <div class="mb-5 d-flex"> <a href="{{ url('/' . ($page = 'Home')) }}"><img
+                                <div class="card-sigin auth-card">
+                                    <div class="mb-5 d-flex"> <a href="{{ url('/') }}"><img
                                                 src="{{ URL::asset('assets/img/brand/favicon.png') }}"
                                                 class="sign-favicon ht-40" alt="logo"></a>
                                         <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">برنامج الفواتير </h1>
@@ -31,13 +32,20 @@
                                         <div class="main-signup-header">
                                             <h2>مرحبا بك</h2>
                                             <h5 class="font-weight-semibold mb-4"> تسجيل الدخول</h5>
+
+                                            <div class="auth-demo-hint">
+                                                <i class="fas fa-info-circle text-primary"></i>
+                                                حساب تجريبي جاهز: <strong>admin@demo.com</strong> /
+                                                <strong>password</strong>
+                                            </div>
+
                                             <form method="POST" action="{{ route('login') }}">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label>البريد الالكتروني</label>
                                                     <input id="email" type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
-                                                        name="email" value="{{ old('email') }}" required
+                                                        name="email" value="{{ old('email', request('email')) }}" required
                                                         autocomplete="email" autofocus>
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
@@ -51,7 +59,7 @@
 
                                                     <input id="password" type="password"
                                                         class="form-control @error('password') is-invalid @enderror"
-                                                        name="password" required autocomplete="current-password">
+                                                        name="password" value="{{ request('password') }}" required autocomplete="current-password">
 
                                                     @error('password')
                                                         <span class="invalid-feedback" role="alert">
@@ -85,11 +93,16 @@
                 </div>
             </div><!-- End -->
 
-            <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
-                <div class="row wd-100p mx-auto text-center">
-                    <div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
-                        <img src="{{ URL::asset('assets/img/media/login.png') }}"
-                            class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
+            <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex p-0">
+                <div class="auth-brand-panel w-100">
+                    <div>
+                        <h2 class="mb-3">نظام متكامل لإدارة فواتيرك</h2>
+                        <p class="mb-0" style="opacity:.85">فواتير، تقارير، صلاحيات، وكل ما تحتاجه من لوحة واحدة.</p>
+                        <ul class="auth-feature-list">
+                            <li><i class="fas fa-receipt"></i> إدارة كاملة للفواتير وحالات الدفع</li>
+                            <li><i class="fas fa-shield-alt"></i> صلاحيات وأدوار دقيقة لكل مستخدم</li>
+                            <li><i class="fas fa-chart-line"></i> تقارير وتصدير فوري للبيانات</li>
+                        </ul>
                     </div>
                 </div>
             </div>

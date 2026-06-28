@@ -13,6 +13,11 @@
 </head>
 
 <body class="main-body app sidebar-mini">
+    <script>
+        if (localStorage.getItem('app-theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    </script>
     <!-- Loader -->
     <div id="global-loader">
         <img src="{{ URL::asset('assets/img/loader.svg') }}" class="loader-img" alt="Loader">
