@@ -110,8 +110,10 @@
                                         <td>
                                             @can('تعديل منتج')
                                                 <button class="btn btn-outline-success btn-sm"
-                                                    data-name="{{ $Product->Product_name }}" data-pro_id="{{ $Product->id }}"
-                                                    data-section_name="{{ $Product->section->section_name }}"
+                                                    data-name_ar="{{ $Product->getTranslation('Product_name', 'ar') }}"
+                                                    data-name_en="{{ $Product->getTranslation('Product_name', 'en') }}"
+                                                    data-pro_id="{{ $Product->id }}"
+                                                    data-section_id="{{ $Product->section_id }}"
                                                     data-description="{{ $Product->description }}" data-toggle="modal"
                                                     data-target="#edit_Product">تعديل</button>
                                             @endcan
@@ -147,8 +149,14 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">اسم المنتج</label>
-                                <input type="text" class="form-control" id="Product_name" name="Product_name"
+                                <label for="Product_name_ar">اسم المنتج (عربي)</label>
+                                <input type="text" class="form-control" id="Product_name_ar" name="Product_name_ar"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Product_name_en">اسم المنتج (انجليزي)</label>
+                                <input type="text" class="form-control" id="Product_name_en" name="Product_name_en"
                                     required>
                             </div>
 
@@ -191,25 +199,28 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
 
+                            <input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
+
                             <div class="form-group">
-                                <label for="title">اسم المنتج :</label>
+                                <label for="Product_name_ar_edit">اسم المنتج (عربي) :</label>
+                                <input type="text" class="form-control" name="Product_name_ar" id="Product_name_ar_edit">
+                            </div>
 
-                                <input type="hidden" class="form-control" name="pro_id" id="pro_id"
-                                    value="">
-
-                                <input type="text" class="form-control" name="Product_name" id="Product_name">
+                            <div class="form-group">
+                                <label for="Product_name_en_edit">اسم المنتج (انجليزي) :</label>
+                                <input type="text" class="form-control" name="Product_name_en" id="Product_name_en_edit">
                             </div>
 
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                            <select name="section_name" id="section_name" class="custom-select my-1 mr-sm-2" required>
+                            <select name="section_id" id="section_id_edit" class="custom-select my-1 mr-sm-2" required>
                                 @foreach ($sections as $section)
-                                    <option>{{ $section->section_name }}</option>
+                                    <option value="{{ $section->id }}">{{ $section->section_name }}</option>
                                 @endforeach
                             </select>
 
                             <div class="form-group">
                                 <label for="des">ملاحظات :</label>
-                                <textarea name="description" cols="20" rows="5" id='description' class="form-control"></textarea>
+                                <textarea name="description" cols="20" rows="5" id='description_edit' class="form-control"></textarea>
                             </div>
 
                         </div>
@@ -291,14 +302,16 @@
     <script>
         $('#edit_Product').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
-            var Product_name = button.data('name')
-            var section_name = button.data('section_name')
+            var Product_name_ar = button.data('name_ar')
+            var Product_name_en = button.data('name_en')
+            var section_id = button.data('section_id')
             var pro_id = button.data('pro_id')
             var description = button.data('description')
             var modal = $(this)
-            modal.find('.modal-body #Product_name').val(Product_name);
-            modal.find('.modal-body #section_name').val(section_name);
-            modal.find('.modal-body #description').val(description);
+            modal.find('.modal-body #Product_name_ar_edit').val(Product_name_ar);
+            modal.find('.modal-body #Product_name_en_edit').val(Product_name_en);
+            modal.find('.modal-body #section_id_edit').val(section_id);
+            modal.find('.modal-body #description_edit').val(description);
             modal.find('.modal-body #pro_id').val(pro_id);
         })
 

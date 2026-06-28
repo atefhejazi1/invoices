@@ -1,3 +1,7 @@
+@php
+    $cssDir = \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocaleDirection();
+    $cssFolder = $cssDir === 'rtl' ? 'css-rtl' : 'css';
+@endphp
 <!-- Title -->
 <title> @yield('title') </title>
 <!-- Favicon -->
@@ -9,13 +13,17 @@
 <!--  Sidebar css -->
 <link href="{{URL::asset('assets/plugins/sidebar/sidebar.css')}}" rel="stylesheet">
 <!-- Sidemenu css -->
-<link rel="stylesheet" href="{{URL::asset('assets/css-rtl/sidemenu.css')}}">
+<link rel="stylesheet" href="{{URL::asset("assets/{$cssFolder}/sidemenu.css")}}">
 @yield('css')
 <!--- Style css -->
-<link href="{{URL::asset('assets/css-rtl/style.css')}}" rel="stylesheet">
-<!--- Dark-mode css -->
-<link href="{{URL::asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
+<link href="{{URL::asset("assets/{$cssFolder}/style.css")}}" rel="stylesheet">
 <!---Skinmodes css-->
-<link href="{{URL::asset('assets/css-rtl/skin-modes.css')}}" rel="stylesheet">
+<link href="{{URL::asset("assets/{$cssFolder}/skin-modes.css")}}" rel="stylesheet">
 <!-- App overrides (portfolio polish) -->
 <link href="{{URL::asset('css/app-overrides.css')}}" rel="stylesheet">
+@if ($cssDir === 'rtl')
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+@else
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', 'Roboto', sans-serif; }</style>
+@endif

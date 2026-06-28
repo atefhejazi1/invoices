@@ -94,13 +94,15 @@
                             @foreach ($sections as $x)
                                 <?php $i++; ?>
                                 <tr>
-                                    <td>{{ $i }}</td>
+                    <td>{{ $i }}</td>
                                     <td>{{ $x->section_name }}</td>
                                     <td>{{ $x->description }}</td>
                                     <td>
                                         @can('تعديل قسم')
                                             <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                                data-id="{{ $x->id }}" data-section_name="{{ $x->section_name }}"
+                                                data-id="{{ $x->id }}"
+                                                data-section_name_ar="{{ $x->getTranslation('section_name', 'ar') }}"
+                                                data-section_name_en="{{ $x->getTranslation('section_name', 'en') }}"
                                                 data-description="{{ $x->description }}" data-toggle="modal"
                                                 href="#exampleModal2" title="تعديل"><i class="las la-pen"></i></a>
                                         @endcan
@@ -135,8 +137,13 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">اسم القسم</label>
-                            <input type="text" class="form-control" id="section_name" name="section_name">
+                            <label for="section_name_ar">اسم القسم (عربي)</label>
+                            <input type="text" class="form-control" id="section_name_ar" name="section_name_ar">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="section_name_en">اسم القسم (انجليزي)</label>
+                            <input type="text" class="form-control" id="section_name_en" name="section_name_en">
                         </div>
 
                         <div class="form-group">
@@ -174,8 +181,12 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" value="">
-                            <label for="recipient-name" class="col-form-label">اسم القسم:</label>
-                            <input class="form-control" name="section_name" id="section_name" type="text">
+                            <label for="section_name_ar_edit" class="col-form-label">اسم القسم (عربي):</label>
+                            <input class="form-control" name="section_name_ar" id="section_name_ar_edit" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="section_name_en_edit" class="col-form-label">اسم القسم (انجليزي):</label>
+                            <input class="form-control" name="section_name_en" id="section_name_en_edit" type="text">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">ملاحظات:</label>
@@ -251,11 +262,13 @@
     $('#exampleModal2').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
         var id = button.data('id')
-        var section_name = button.data('section_name')
+        var section_name_ar = button.data('section_name_ar')
+        var section_name_en = button.data('section_name_en')
         var description = button.data('description')
         var modal = $(this)
         modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #section_name').val(section_name);
+        modal.find('.modal-body #section_name_ar_edit').val(section_name_ar);
+        modal.find('.modal-body #section_name_en_edit').val(section_name_en);
         modal.find('.modal-body #description').val(description);
     })
 </script>

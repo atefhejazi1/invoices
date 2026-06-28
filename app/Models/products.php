@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class products extends Model
 {
+    use HasTranslations;
 
     protected $fillable = [
         "Product_name",
@@ -13,6 +15,7 @@ class products extends Model
         "section_id"
     ];
 
+    public $translatable = ['Product_name'];
 
     public function section()
     {

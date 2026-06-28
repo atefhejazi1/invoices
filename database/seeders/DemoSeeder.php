@@ -31,10 +31,10 @@ class DemoSeeder extends Seeder
         }
 
         $sectionsData = [
-            ['section_name' => 'قسم المبيعات', 'description' => 'فواتير المبيعات والعقود'],
-            ['section_name' => 'قسم التسويق', 'description' => 'فواتير الحملات التسويقية'],
-            ['section_name' => 'قسم تقنية المعلومات', 'description' => 'فواتير الخدمات التقنية'],
-            ['section_name' => 'قسم الموارد البشرية', 'description' => 'فواتير التدريب والتوظيف'],
+            ['section_name' => ['ar' => 'قسم المبيعات', 'en' => 'Sales Department'], 'description' => 'فواتير المبيعات والعقود'],
+            ['section_name' => ['ar' => 'قسم التسويق', 'en' => 'Marketing Department'], 'description' => 'فواتير الحملات التسويقية'],
+            ['section_name' => ['ar' => 'قسم تقنية المعلومات', 'en' => 'IT Department'], 'description' => 'فواتير الخدمات التقنية'],
+            ['section_name' => ['ar' => 'قسم الموارد البشرية', 'en' => 'HR Department'], 'description' => 'فواتير التدريب والتوظيف'],
         ];
 
         $createdSections = [];
@@ -47,12 +47,12 @@ class DemoSeeder extends Seeder
         }
 
         $productNames = [
-            'باقة استشارية',
-            'تصميم هوية بصرية',
-            'صيانة دورية',
-            'دورة تدريبية',
-            'ترخيص برمجي',
-            'حملة إعلانية',
+            ['ar' => 'باقة استشارية', 'en' => 'Consulting Package'],
+            ['ar' => 'تصميم هوية بصرية', 'en' => 'Brand Identity Design'],
+            ['ar' => 'صيانة دورية', 'en' => 'Periodic Maintenance'],
+            ['ar' => 'دورة تدريبية', 'en' => 'Training Course'],
+            ['ar' => 'ترخيص برمجي', 'en' => 'Software License'],
+            ['ar' => 'حملة إعلانية', 'en' => 'Advertising Campaign'],
         ];
 
         $createdProducts = [];
@@ -60,7 +60,7 @@ class DemoSeeder extends Seeder
             foreach (array_slice($productNames, 0, 3) as $name) {
                 $createdProducts[] = products::create([
                     'Product_name' => $name,
-                    'description' => $name . ' - ' . $section->section_name,
+                    'description' => $name['ar'] . ' - ' . $section->getTranslation('section_name', 'ar'),
                     'section_id' => $section->id,
                 ]);
             }

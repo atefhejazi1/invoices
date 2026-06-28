@@ -1,7 +1,5 @@
 ﻿/* Portfolio polish layer - overrides the Valex/Bootstrap4 admin theme without touching vendor files. */
 
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
-
 :root {
     --app-primary: #3b6fe0;
     --app-success: #1fa971;
@@ -98,10 +96,6 @@ body,
     height: 100%;
     border-radius: .4rem;
     background: linear-gradient(90deg, var(--app-primary), var(--app-info));
-}
-
-body.dark-theme .leaderboard-bar-bg {
-    background: rgba(255, 255, 255, .08);
 }
 
 /* Sidebar nav badge */
@@ -320,16 +314,6 @@ body.dark-theme .leaderboard-bar-bg {
     border: none;
 }
 
-#themeToggle {
-    font-size: 1.05rem;
-    display: flex;
-    align-items: center;
-}
-
-#themeToggle:hover {
-    color: var(--app-primary);
-}
-
 /* ===== Breadcrumb / page header ===== */
 .breadcrumb-header {
     padding: 1.25rem 0;
@@ -337,35 +321,6 @@ body.dark-theme .leaderboard-bar-bg {
 
 .breadcrumb-header .main-content-title {
     font-weight: 800;
-}
-
-/* ===== Dark theme tweaks for custom elements ===== */
-body.dark-theme .stat-mini,
-body.dark-theme .card,
-body.dark-theme .feature-card,
-body.dark-theme .step-card {
-    box-shadow: 0 2px 12px rgba(0, 0, 0, .35);
-}
-
-body.dark-theme .stat-mini {
-    background: #16233f;
-}
-
-body.dark-theme .status-legend-row {
-    background: rgba(255, 255, 255, .06);
-}
-
-body.dark-theme .app-sidebar .side-menu__item:hover {
-    background: rgba(59, 111, 224, .18);
-}
-
-body.dark-theme .table-hover tbody tr:hover {
-    background-color: rgba(59, 111, 224, .12);
-}
-
-body.dark-theme .main-header-center .form-control {
-    background: rgba(255, 255, 255, .08);
-    color: #fff;
 }
 
 @media (max-width: 575.98px) {

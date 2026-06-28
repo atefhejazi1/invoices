@@ -48,4 +48,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Deterministic placeholder avatar (theme ships faces 1.jpg..17.jpg).
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        $face = ($this->id % 17) + 1;
+
+        return asset("assets/img/faces/{$face}.jpg");
+    }
 }

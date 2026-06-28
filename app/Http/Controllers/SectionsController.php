@@ -31,20 +31,25 @@ class SectionsController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'section_name' => 'required|unique:sections|max:255',
+        $request->validate([
+            'section_name_ar' => ['required', 'max:255', function ($attribute, $value, $fail) {
+                if (sections::where('section_name->ar', $value)->exists()) {
+                    $fail('اسم القسم مسجل مسبقا');
+                }
+            }],
+            'section_name_en' => 'required|max:255',
         ], [
-
-            'section_name.required' => 'يرجي ادخال اسم القسم',
-            'section_name.unique' => 'اسم القسم مسجل مسبقا',
+            'section_name_ar.required' => 'يرجي ادخال اسم القسم بالعربي',
+            'section_name_en.required' => 'يرجي ادخال اسم القسم بالانجليزي',
         ]);
 
-        sections::create([
-            'section_name' => $request->section_name,
+        $section = new sections([
             'description' => $request->description,
-            'Created_by' => (Auth::User()->name),
-
+            'Created_by' => Auth::user()->name,
         ]);
+        $section->setTranslation('section_name', 'ar', $request->section_name_ar);
+        $section->setTranslation('section_name', 'en', $request->section_name_en);
+        $section->save();
 
         session()->flash('Add', 'تم اضافة القسم بنجاح ');
         return redirect('/sections');
@@ -74,21 +79,24 @@ class SectionsController extends Controller
         $id = $request->id;
 
         $request->validate([
-
-            'section_name' => 'required|unique:sections|max:255',
+            'section_name_ar' => ['required', 'max:255', function ($attribute, $value, $fail) use ($id) {
+                if (sections::where('section_name->ar', $value)->where('id', '!=', $id)->exists()) {
+                    $fail('اسم القسم مسجل مسبقا');
+                }
+            }],
+            'section_name_en' => 'required|max:255',
             'description' => 'required',
         ], [
-
-            'section_name.required' => 'يرجي ادخال اسم القسم',
-            'section_name.unique' => 'اسم القسم مسجل مسبقا',
+            'section_name_ar.required' => 'يرجي ادخال اسم القسم بالعربي',
+            'section_name_en.required' => 'يرجي ادخال اسم القسم بالانجليزي',
             'description.required' => 'يرجي ادخال البيانات',
         ]);
 
-        $sections = sections::find($id);
-        $sections->update([
-            'section_name' => $request->section_name,
-            'description' => $request->description,
-        ]);
+        $section = sections::find($id);
+        $section->setTranslation('section_name', 'ar', $request->section_name_ar);
+        $section->setTranslation('section_name', 'en', $request->section_name_en);
+        $section->description = $request->description;
+        $section->save();
 
         session()->flash('edit', 'تم تعديل القسم بنجاج');
         return redirect('/sections');

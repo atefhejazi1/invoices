@@ -295,63 +295,6 @@ footer.landing-footer {
     padding: 2.5rem 0;
 }
 
-/* ===== Dark mode (landing) ===== */
-body.dark-theme {
-    background: #0b1320;
-    color: #e2e8f0;
-}
-
-body.dark-theme .bg-soft {
-    background: #111c33;
-}
-
-body.dark-theme .feature-card,
-body.dark-theme .step-card,
-body.dark-theme .tech-badge {
-    background: #16233f;
-    color: #e2e8f0;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, .35);
-}
-
-body.dark-theme .feature-card .text-muted,
-body.dark-theme .step-card .text-muted {
-    color: #9aa6bf !important;
-}
-
-body.dark-theme .section-title,
-body.dark-theme h1,
-body.dark-theme h2,
-body.dark-theme h5 {
-    color: #f1f5f9;
-}
-
-body.dark-theme .accordion-item {
-    background: #16233f;
-}
-
-body.dark-theme .accordion-button {
-    background: #16233f;
-    color: #e2e8f0;
-}
-
-body.dark-theme .accordion-button:not(.collapsed) {
-    background: rgba(1, 98, 232, .18);
-    color: #fff;
-}
-
-body.dark-theme .accordion-body {
-    background: #16233f;
-    color: #cbd5e1;
-}
-
-body.dark-theme .mockup-row {
-    background: rgba(255, 255, 255, .08);
-}
-
-body.dark-theme .mockup-chart {
-    background: rgba(255, 255, 255, .05);
-}
-
 footer.landing-footer a {
     color: #fff;
     text-decoration: none;

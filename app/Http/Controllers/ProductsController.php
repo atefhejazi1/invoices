@@ -32,11 +32,24 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        Products::create([
-            'Product_name' => $request->Product_name,
+        $request->validate([
+            'Product_name_ar' => 'required|max:255',
+            'Product_name_en' => 'required|max:255',
+            'section_id' => 'required|exists:sections,id',
+        ], [
+            'Product_name_ar.required' => 'يرجي ادخال اسم المنتج بالعربي',
+            'Product_name_en.required' => 'يرجي ادخال اسم المنتج بالانجليزي',
+            'section_id.required' => 'يرجي تحديد القسم',
+        ]);
+
+        $product = new products([
             'section_id' => $request->section_id,
             'description' => $request->description,
         ]);
+        $product->setTranslation('Product_name', 'ar', $request->Product_name_ar);
+        $product->setTranslation('Product_name', 'en', $request->Product_name_en);
+        $product->save();
+
         session()->flash('Add', 'تم اضافة المنتج بنجاح ');
         return redirect('/products');
     }
@@ -60,17 +73,24 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, products $products)
+    public function update(Request $request)
     {
-        $id = sections::where('section_name', $request->section_name)->first()->id;
-
-        $Products = Products::findOrFail($request->pro_id);
-
-        $Products->update([
-            'Product_name' => $request->Product_name,
-            'description' => $request->description,
-            'section_id' => $id,
+        $request->validate([
+            'Product_name_ar' => 'required|max:255',
+            'Product_name_en' => 'required|max:255',
+            'section_id' => 'required|exists:sections,id',
+        ], [
+            'Product_name_ar.required' => 'يرجي ادخال اسم المنتج بالعربي',
+            'Product_name_en.required' => 'يرجي ادخال اسم المنتج بالانجليزي',
+            'section_id.required' => 'يرجي تحديد القسم',
         ]);
+
+        $product = products::findOrFail($request->pro_id);
+        $product->setTranslation('Product_name', 'ar', $request->Product_name_ar);
+        $product->setTranslation('Product_name', 'en', $request->Product_name_en);
+        $product->description = $request->description;
+        $product->section_id = $request->section_id;
+        $product->save();
 
         session()->flash('Edit', 'تم تعديل المنتج بنجاح');
         return back();
