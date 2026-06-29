@@ -2,15 +2,15 @@
 @section('css')
 @endsection
 @section('title')
-    تغير حالة الدفع
+    {{ __('invoices.update_payment_status') }}
 @stop
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    تغير حالة الدفع</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('invoices.title') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    {{ __('invoices.update_payment_status') }}</span>
             </div>
         </div>
 
@@ -28,21 +28,21 @@
                         {{-- 1 --}}
                         <div class="row">
                             <div class="col">
-                                <label for="inputName" class="control-label">رقم الفاتورة</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.col_invoice_number') }}</label>
                                 <input type="hidden" name="invoice_id" value="{{ $invoices->id }}">
                                 <input type="text" class="form-control" id="inputName" name="invoice_number"
-                                    title="يرجي ادخال رقم الفاتورة" value="{{ $invoices->invoice_number }}" required
+                                    title="{{ __('invoices.please_enter_invoice_number') }}" value="{{ $invoices->invoice_number }}" required
                                     readonly>
                             </div>
 
                             <div class="col">
-                                <label>تاريخ الفاتورة</label>
+                                <label>{{ __('invoices.col_invoice_date') }}</label>
                                 <input class="form-control fc-datepicker" name="invoice_Date" placeholder="YYYY-MM-DD"
                                     type="text" value="{{ $invoices->invoice_Date }}" required readonly>
                             </div>
 
                             <div class="col">
-                                <label>تاريخ الاستحقاق</label>
+                                <label>{{ __('invoices.col_due_date') }}</label>
                                 <input class="form-control fc-datepicker" name="Due_date" placeholder="YYYY-MM-DD"
                                     type="text" value="{{ $invoices->Due_date }}" required readonly>
                             </div>
@@ -52,7 +52,7 @@
                         {{-- 2 --}}
                         <div class="row">
                             <div class="col">
-                                <label for="inputName" class="control-label">القسم</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.col_section') }}</label>
                                 <select name="Section" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')" readonly>
                                     <!--placeholder-->
@@ -64,14 +64,14 @@
                             </div>
 
                             <div class="col">
-                                <label for="inputName" class="control-label">المنتج</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.col_product') }}</label>
                                 <select id="product" name="product" class="form-control" readonly>
                                     <option value="{{ $invoices->product }}"> {{ $invoices->product }}</option>
                                 </select>
                             </div>
 
                             <div class="col">
-                                <label for="inputName" class="control-label">مبلغ التحصيل</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.collection_amount') }}</label>
                                 <input type="text" class="form-control" id="inputName" name="Amount_collection"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     value="{{ $invoices->Amount_collection }}" readonly>
@@ -84,21 +84,21 @@
                         <div class="row">
 
                             <div class="col">
-                                <label for="inputName" class="control-label">مبلغ العمولة</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.commission_amount') }}</label>
                                 <input type="text" class="form-control form-control-lg" id="Amount_Commission"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     value="{{ $invoices->Amount_Commission }}" required readonly>
                             </div>
 
                             <div class="col">
-                                <label for="inputName" class="control-label">الخصم</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.col_discount') }}</label>
                                 <input type="text" class="form-control form-control-lg" id="Discount" name="Discount"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     value="{{ $invoices->Discount }}" required readonly>
                             </div>
 
                             <div class="col">
-                                <label for="inputName" class="control-label">نسبة ضريبة القيمة المضافة</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.vat_rate') }}</label>
                                 <select name="Rate_VAT" id="Rate_VAT" class="form-control" onchange="myFunction()" readonly>
                                     <!--placeholder-->
                                     <option value=" {{ $invoices->Rate_VAT }}">
@@ -112,13 +112,13 @@
 
                         <div class="row">
                             <div class="col">
-                                <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.vat_value') }}</label>
                                 <input type="text" class="form-control" id="Value_VAT" name="Value_VAT"
                                     value="{{ $invoices->Value_VAT }}" readonly>
                             </div>
 
                             <div class="col">
-                                <label for="inputName" class="control-label">الاجمالي شامل الضريبة</label>
+                                <label for="inputName" class="control-label">{{ __('invoices.total_with_tax') }}</label>
                                 <input type="text" class="form-control" id="Total" name="Total" readonly
                                     value="{{ $invoices->Total }}">
                             </div>
@@ -127,7 +127,7 @@
                         {{-- 5 --}}
                         <div class="row">
                             <div class="col">
-                                <label for="exampleTextarea">ملاحظات</label>
+                                <label for="exampleTextarea">{{ __('invoices.col_notes') }}</label>
                                 <textarea class="form-control" id="exampleTextarea" name="note" rows="3" readonly>
                                 {{ $invoices->note }}</textarea>
                             </div>
@@ -135,16 +135,16 @@
 
                         <div class="row">
                             <div class="col">
-                                <label for="exampleTextarea">حالة الدفع</label>
+                                <label for="exampleTextarea">{{ __('invoices.payment_status') }}</label>
                                 <select class="form-control" id="Status" name="Status" required>
-                                    <option selected="true" disabled="disabled">-- حدد حالة الدفع --</option>
-                                    <option value="مدفوعة">مدفوعة</option>
-                                    <option value="مدفوعة جزئيا">مدفوعة جزئيا</option>
+                                    <option selected="true" disabled="disabled">{{ __('invoices.select_payment_status') }}</option>
+                                    <option value="paid">{{ __('status.paid') }}</option>
+                                    <option value="partial">{{ __('status.partial') }}</option>
                                 </select>
                             </div>
 
                             <div class="col">
-                                <label>تاريخ الدفع</label>
+                                <label>{{ __('invoices.payment_date') }}</label>
                                 <input class="form-control fc-datepicker" name="Payment_Date" placeholder="YYYY-MM-DD"
                                     type="text" required>
                             </div>
@@ -153,7 +153,7 @@
                         </div><br>
 
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">تحديث حالة الدفع</button>
+                            <button type="submit" class="btn btn-primary">{{ __('invoices.update_payment_status_title') }}</button>
                         </div>
 
                     </form>

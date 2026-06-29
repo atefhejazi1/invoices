@@ -15,7 +15,7 @@
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
 @section('title')
-    تقرير العملاء
+    {{ __('reports.customers_report') }}
 @stop
 @endsection
 @section('page-header')
@@ -23,8 +23,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">التقارير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تقرير
-                العملاء</span>
+            <h4 class="content-title mb-0 my-auto">{{ __('reports.menu') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('reports.customers_report') }}</span>
         </div>
     </div>
 </div>
@@ -37,7 +36,7 @@
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
-        <strong>خطا</strong>
+        <strong>{{ __('reports.error') }}</strong>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -62,11 +61,11 @@
                     <div class="row">
 
                         <div class="col">
-                            <label for="inputName" class="control-label">القسم</label>
+                            <label for="inputName" class="control-label">{{ __('reports.col_section') }}</label>
                             <select name="Section" class="form-control select2" onclick="console.log($(this).val())"
                                 onchange="console.log('change is firing')">
                                 <!--placeholder-->
-                                <option value="" selected disabled>حدد القسم</option>
+                                <option value="" selected disabled>{{ __('invoices.select_section') }}</option>
                                 @foreach ($sections as $section)
                                     <option value="{{ $section->id }}"> {{ $section->section_name }}</option>
                                 @endforeach
@@ -74,14 +73,14 @@
                         </div>
 
                         <div class="col-lg-3 mg-t-20 mg-lg-t-0">
-                            <label for="inputName" class="control-label">المنتج</label>
+                            <label for="inputName" class="control-label">{{ __('reports.col_product') }}</label>
                             <select id="product" name="product" class="form-control select2">
                             </select>
                         </div>
 
 
                         <div class="col-lg-3" id="start_at">
-                            <label for="exampleFormControlSelect1">من تاريخ</label>
+                            <label for="exampleFormControlSelect1">{{ __('reports.from_date') }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -93,7 +92,7 @@
                         </div>
 
                         <div class="col-lg-3" id="end_at">
-                            <label for="exampleFormControlSelect1">الي تاريخ</label>
+                            <label for="exampleFormControlSelect1">{{ __('reports.to_date') }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -107,7 +106,7 @@
 
                     <div class="row">
                         <div class="col-sm-1 col-md-1">
-                            <button class="btn btn-primary btn-block">بحث</button>
+                            <button class="btn btn-primary btn-block">{{ __('reports.search') }}</button>
                         </div>
                     </div>
                 </form>
@@ -119,18 +118,18 @@
                         <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ القاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">المنتج</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_number') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_invoice_number') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_invoice_date') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_due_date') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_product') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_section') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_discount') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_tax_rate') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_tax_value') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_total') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_status') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_notes') }}</th>
 
                                 </tr>
                             </thead>

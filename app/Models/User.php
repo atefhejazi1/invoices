@@ -23,7 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'Status'
+        'Status',
+        'avatar'
     ];
 
     /**
@@ -50,10 +51,14 @@ class User extends Authenticatable
     }
 
     /**
-     * Deterministic placeholder avatar (theme ships faces 1.jpg..17.jpg).
+     * Real uploaded avatar if set, else deterministic placeholder (theme ships faces 1.jpg..17.jpg).
      */
     public function getAvatarUrlAttribute(): string
     {
+        if ($this->avatar) {
+            return asset('storage/' . $this->avatar);
+        }
+
         $face = ($this->id % 17) + 1;
 
         return asset("assets/img/faces/{$face}.jpg");

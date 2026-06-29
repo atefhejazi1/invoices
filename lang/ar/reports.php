@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'menu' => 'التقارير',
+    'invoices_report' => 'تقرير الفواتير',
+    'customers_report' => 'تقرير العملاء',
+    'error' => 'خطا',
+    'search_by_invoice_type' => 'بحث بنوع الفاتورة',
+    'search_by_invoice_number' => 'بحث برقم الفاتورة',
+    'select_invoice_type' => 'تحديد نوع الفواتير',
+    'select_invoice_type_placeholder' => 'حدد نوع الفواتير',
+    'search_by_invoice_number_label' => 'البحث برقم الفاتورة',
+    'from_date' => 'من تاريخ',
+    'to_date' => 'الي تاريخ',
+    'search' => 'بحث',
+    'col_number' => '#',
+    'col_invoice_number' => 'رقم الفاتورة',
+    'col_invoice_date' => 'تاريخ الفاتورة',
+    'col_due_date' => 'تاريخ الاستحقاق',
+    'col_product' => 'المنتج',
+    'col_section' => 'القسم',
+    'col_discount' => 'الخصم',
+    'col_tax_rate' => 'نسبة الضريبة',
+    'col_tax_value' => 'قيمة الضريبة',
+    'col_total' => 'الاجمالي',
+    'col_status' => 'الحالة',
+    'col_notes' => 'ملاحظات',
+];

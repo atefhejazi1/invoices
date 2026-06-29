@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'Products',
+    'settings' => 'Settings',
+    'add_product' => 'Add Product',
+    'edit_product' => 'Edit Product',
+    'delete_product' => 'Delete Product',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'col_number' => '#',
+    'product_name' => 'Product Name',
+    'section_name' => 'Section Name',
+    'notes' => 'Notes',
+    'actions' => 'Actions',
+    'product_name_ar' => 'Product Name (Arabic)',
+    'product_name_en' => 'Product Name (English)',
+    'section' => 'Section',
+    'select_section' => '-- Select Section --',
+    'confirm' => 'Confirm',
+    'close' => 'Close',
+    'cancel' => 'Cancel',
+    'save_data' => 'Save Changes',
+    'confirm_delete_question' => 'Are you sure you want to delete?',
+];

@@ -23,7 +23,7 @@ class DemoSeeder extends Seeder
             'name' => 'Demo Admin',
             'email' => 'admin@demo.com',
             'password' => bcrypt('password'),
-            'Status' => 'مفعل',
+            'Status' => 'active',
         ]);
 
         if ($role) {
@@ -67,9 +67,9 @@ class DemoSeeder extends Seeder
         }
 
         $statuses = [
-            1 => 'مدفوعة',
-            2 => 'غير مدفوعة',
-            3 => 'مدفوعة جزئياً',
+            1 => 'paid',
+            2 => 'unpaid',
+            3 => 'partial',
         ];
 
         for ($i = 1; $i <= 60; $i++) {

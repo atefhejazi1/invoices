@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'menu' => 'Reports',
+    'invoices_report' => 'Invoices Report',
+    'customers_report' => 'Customers Report',
+    'error' => 'Error',
+    'search_by_invoice_type' => 'Search by Invoice Type',
+    'search_by_invoice_number' => 'Search by Invoice Number',
+    'select_invoice_type' => 'Select Invoice Type',
+    'select_invoice_type_placeholder' => 'Select Invoice Type',
+    'search_by_invoice_number_label' => 'Search by Invoice Number',
+    'from_date' => 'From Date',
+    'to_date' => 'To Date',
+    'search' => 'Search',
+    'col_number' => '#',
+    'col_invoice_number' => 'Invoice Number',
+    'col_invoice_date' => 'Invoice Date',
+    'col_due_date' => 'Due Date',
+    'col_product' => 'Product',
+    'col_section' => 'Section',
+    'col_discount' => 'Discount',
+    'col_tax_rate' => 'Tax Rate',
+    'col_tax_value' => 'Tax Value',
+    'col_total' => 'Total',
+    'col_status' => 'Status',
+    'col_notes' => 'Notes',
+];

@@ -13,6 +13,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Hash as FacadesHash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -53,11 +54,16 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'avatar' => 'nullable|image|max:2048'
         ]);
 
         $input = $request->all();
         $input['password'] = FacadesHash::make($input['password']);
+
+        if ($request->hasFile('avatar')) {
+            $input['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
@@ -107,7 +113,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'avatar' => 'nullable|image|max:2048'
         ]);
 
         $input = $request->all();
@@ -118,6 +125,16 @@ class UserController extends Controller
         }
 
         $user = User::find($id);
+
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $input['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        } else {
+            $input = Arr::except($input, array('avatar'));
+        }
+
         $user->update($input);
         FacadesDB::table('model_has_roles')->where('model_id', $id)->delete();
 

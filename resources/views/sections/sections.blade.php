@@ -8,7 +8,7 @@
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 @section('title')
-    الاقسام
+    {{ __('sections.title') }}
 @stop
 
 @endsection
@@ -17,8 +17,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">الاعدادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                الاقسام</span>
+            <h4 class="content-title mb-0 my-auto">{{ __('sections.settings') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                {{ __('sections.title') }}</span>
         </div>
     </div>
 </div>
@@ -70,9 +70,9 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                    @can('اضافة قسم')
+                    @can('sections.create')
                         <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#modaldemo8">اضافة قسم</a>
+                            data-toggle="modal" href="#modaldemo8">{{ __('sections.add_section') }}</a>
                     @endcan
 
                 </div>
@@ -83,10 +83,10 @@
                     <table id="example1" class="table key-buttons text-md-nowrap">
                         <thead>
                             <tr>
-                                <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">اسم القسم</th>
-                                <th class="border-bottom-0">الوصف</th>
-                                <th class="border-bottom-0">العمليات</th>
+                                <th class="border-bottom-0">{{ __('sections.col_number') }}</th>
+                                <th class="border-bottom-0">{{ __('sections.section_name') }}</th>
+                                <th class="border-bottom-0">{{ __('sections.description') }}</th>
+                                <th class="border-bottom-0">{{ __('sections.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,19 +98,19 @@
                                     <td>{{ $x->section_name }}</td>
                                     <td>{{ $x->description }}</td>
                                     <td>
-                                        @can('تعديل قسم')
+                                        @can('sections.edit')
                                             <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                                 data-id="{{ $x->id }}"
                                                 data-section_name_ar="{{ $x->getTranslation('section_name', 'ar') }}"
                                                 data-section_name_en="{{ $x->getTranslation('section_name', 'en') }}"
                                                 data-description="{{ $x->description }}" data-toggle="modal"
-                                                href="#exampleModal2" title="تعديل"><i class="las la-pen"></i></a>
+                                                href="#exampleModal2" title="{{ __('sections.edit') }}"><i class="las la-pen"></i></a>
                                         @endcan
 
-                                        @can('حذف قسم')
+                                        @can('sections.delete')
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                                 data-id="{{ $x->id }}" data-section_name="{{ $x->section_name }}"
-                                                data-toggle="modal" href="#modaldemo9" title="حذف"><i
+                                                data-toggle="modal" href="#modaldemo9" title="{{ __('sections.delete') }}"><i
                                                     class="las la-trash"></i></a>
                                         @endcan
 
@@ -129,7 +129,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h6 class="modal-title">اضافة قسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                    <h6 class="modal-title">{{ __('sections.add_section') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                         type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -137,23 +137,23 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="section_name_ar">اسم القسم (عربي)</label>
+                            <label for="section_name_ar">{{ __('sections.section_name_ar') }}</label>
                             <input type="text" class="form-control" id="section_name_ar" name="section_name_ar">
                         </div>
 
                         <div class="form-group">
-                            <label for="section_name_en">اسم القسم (انجليزي)</label>
+                            <label for="section_name_en">{{ __('sections.section_name_en') }}</label>
                             <input type="text" class="form-control" id="section_name_en" name="section_name_en">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">ملاحظات</label>
+                            <label for="exampleFormControlTextarea1">{{ __('sections.notes') }}</label>
                             <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">تاكيد</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                            <button type="submit" class="btn btn-success">{{ __('sections.confirm') }}</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('sections.close') }}</button>
                         </div>
                     </form>
                 </div>
@@ -169,7 +169,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">تعديل القسم</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('sections.edit_section') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -181,21 +181,21 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" value="">
-                            <label for="section_name_ar_edit" class="col-form-label">اسم القسم (عربي):</label>
+                            <label for="section_name_ar_edit" class="col-form-label">{{ __('sections.section_name_ar') }}:</label>
                             <input class="form-control" name="section_name_ar" id="section_name_ar_edit" type="text">
                         </div>
                         <div class="form-group">
-                            <label for="section_name_en_edit" class="col-form-label">اسم القسم (انجليزي):</label>
+                            <label for="section_name_en_edit" class="col-form-label">{{ __('sections.section_name_en') }}:</label>
                             <input class="form-control" name="section_name_en" id="section_name_en_edit" type="text">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">ملاحظات:</label>
+                            <label for="message-text" class="col-form-label">{{ __('sections.notes') }}:</label>
                             <textarea class="form-control" id="description" name="description"></textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">تاكيد</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                    <button type="submit" class="btn btn-primary">{{ __('sections.confirm') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('sections.close') }}</button>
                 </div>
                 </form>
             </div>
@@ -207,20 +207,20 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close"
+                    <h6 class="modal-title">{{ __('sections.delete_section') }}</h6><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form action="sections/destroy" method="post">
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                        <p>{{ __('sections.confirm_delete_question') }}</p><br>
                         <input type="hidden" name="id" id="id" value="">
                         <input class="form-control" name="section_name" id="section_name" type="text" readonly>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('sections.cancel') }}</button>
+                        <button type="submit" class="btn btn-danger">{{ __('sections.confirm') }}</button>
                     </div>
             </div>
             </form>

@@ -15,7 +15,7 @@
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
 @section('title')
-    تقرير الفواتير
+    {{ __('reports.invoices_report') }}
 @stop
 @endsection
 @section('page-header')
@@ -23,8 +23,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">التقارير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تقرير
-                الفواتير</span>
+            <h4 class="content-title mb-0 my-auto">{{ __('reports.menu') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('reports.invoices_report') }}</span>
         </div>
     </div>
 </div>
@@ -37,7 +36,7 @@
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
-        <strong>خطا</strong>
+        <strong>{{ __('reports.error') }}</strong>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -61,41 +60,40 @@
 
                     <div class="col-lg-3">
                         <label class="rdiobox">
-                            <input checked name="rdio" type="radio" value="1" id="type_div"> <span>بحث بنوع
-                                الفاتورة</span></label>
+                            <input checked name="rdio" type="radio" value="1" id="type_div"> <span>{{ __('reports.search_by_invoice_type') }}</span></label>
                     </div>
 
 
                     <div class="col-lg-3 mg-t-20 mg-lg-t-0">
-                        <label class="rdiobox"><input name="rdio" value="2" type="radio"><span>بحث برقم الفاتورة
+                        <label class="rdiobox"><input name="rdio" value="2" type="radio"><span>{{ __('reports.search_by_invoice_number') }}
                             </span></label>
                     </div><br><br>
 
                     <div class="row">
 
                         <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="type">
-                            <p class="mg-b-10">تحديد نوع الفواتير</p><select class="form-control select2" name="type"
+                            <p class="mg-b-10">{{ __('reports.select_invoice_type') }}</p><select class="form-control select2" name="type"
                                 required>
-                                <option value="{{ $type ?? 'حدد نوع الفواتير' }}" selected>
-                                    {{ $type ?? 'حدد نوع الفواتير' }}
+                                <option value="{{ $type ?? __('reports.select_invoice_type_placeholder') }}" selected>
+                                    {{ $type ?? __('reports.select_invoice_type_placeholder') }}
                                 </option>
 
-                                <option value="مدفوعة">الفواتير المدفوعة</option>
-                                <option value="غير مدفوعة">الفواتير الغير مدفوعة</option>
-                                <option value="مدفوعة جزئيا">الفواتير المدفوعة جزئيا</option>
+                                <option value="paid">{{ __('invoices.title_paid') }}</option>
+                                <option value="unpaid">{{ __('invoices.title_unpaid') }}</option>
+                                <option value="partial">{{ __('invoices.title_partial') }}</option>
 
                             </select>
                         </div><!-- col-4 -->
 
 
                         <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="invoice_number">
-                            <p class="mg-b-10">البحث برقم الفاتورة</p>
+                            <p class="mg-b-10">{{ __('reports.search_by_invoice_number_label') }}</p>
                             <input type="text" class="form-control" id="invoice_number" name="invoice_number">
 
                         </div><!-- col-4 -->
 
                         <div class="col-lg-3" id="start_at">
-                            <label for="exampleFormControlSelect1">من تاريخ</label>
+                            <label for="exampleFormControlSelect1">{{ __('reports.from_date') }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -107,7 +105,7 @@
                         </div>
 
                         <div class="col-lg-3" id="end_at">
-                            <label for="exampleFormControlSelect1">الي تاريخ</label>
+                            <label for="exampleFormControlSelect1">{{ __('reports.to_date') }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -121,7 +119,7 @@
 
                     <div class="row">
                         <div class="col-sm-1 col-md-1">
-                            <button class="btn btn-primary btn-block">بحث</button>
+                            <button class="btn btn-primary btn-block">{{ __('reports.search') }}</button>
                         </div>
                     </div>
                 </form>
@@ -133,18 +131,18 @@
                         <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ القاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">المنتج</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_number') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_invoice_number') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_invoice_date') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_due_date') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_product') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_section') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_discount') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_tax_rate') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_tax_value') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_total') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_status') }}</th>
+                                    <th class="border-bottom-0">{{ __('reports.col_notes') }}</th>
 
                                 </tr>
                             </thead>

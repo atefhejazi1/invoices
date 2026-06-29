@@ -1,14 +1,14 @@
 @extends('layouts.master')
 @section('title')
-    لوحة التحكم - برنامج الفواتير
+    {{ __('dashboard.title') }}
 @stop
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">أهلا بعودتك أستاذ {{ Auth::user()->name }}</h2>
-                <p class="mg-b-0">الحل الامثل لإدارة الفواتير الخاصة بك</p>
+                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">{{ __('dashboard.welcome_back') }} {{ Auth::user()->name }}</h2>
+                <p class="mg-b-0">{{ __('dashboard.tagline') }}</p>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 <div class="stat-mini-icon bg-primary-transparent text-primary"><i class="fas fa-file-invoice"></i></div>
                 <div>
                     <h4 class="mb-0">{{ $count_all }}</h4>
-                    <span class="text-muted tx-12">اجمالي الفواتير</span>
+                    <span class="text-muted tx-12">{{ __('dashboard.total_invoices') }}</span>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <div class="stat-mini-icon bg-success-transparent text-success"><i class="fas fa-check-circle"></i></div>
                 <div>
                     <h4 class="mb-0">{{ $count_invoices1 }}</h4>
-                    <span class="text-muted tx-12">مدفوعة</span>
+                    <span class="text-muted tx-12">{{ __('status.paid') }}</span>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <div class="stat-mini-icon bg-danger-transparent text-danger"><i class="fas fa-times-circle"></i></div>
                 <div>
                     <h4 class="mb-0">{{ $count_invoices2 }}</h4>
-                    <span class="text-muted tx-12">غير مدفوعة</span>
+                    <span class="text-muted tx-12">{{ __('status.unpaid') }}</span>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 <div class="stat-mini-icon bg-warning-transparent text-warning"><i class="fas fa-adjust"></i></div>
                 <div>
                     <h4 class="mb-0">{{ $count_invoices3 }}</h4>
-                    <span class="text-muted tx-12">مدفوعة جزئياً</span>
+                    <span class="text-muted tx-12">{{ __('status.partial') }}</span>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <div class="stat-mini-icon bg-info-transparent text-info"><i class="fas fa-building"></i></div>
                 <div>
                     <h4 class="mb-0">{{ $totalSections }}</h4>
-                    <span class="text-muted tx-12">الاقسام</span>
+                    <span class="text-muted tx-12">{{ __('dashboard.sections') }}</span>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <div class="stat-mini-icon bg-secondary-transparent text-secondary"><i class="fas fa-coins"></i></div>
                 <div>
                     <h4 class="mb-0">{{ number_format($totalRevenue, 2) }}</h4>
-                    <span class="text-muted tx-12">الايرادات</span>
+                    <span class="text-muted tx-12">{{ __('dashboard.revenue') }}</span>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
             <div class="card h-100">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
                     <h4 class="card-title mb-0">
-                        <i class="fas fa-exclamation-triangle text-danger me-2"></i>فواتير متأخرة
+                        <i class="fas fa-exclamation-triangle text-danger me-2"></i>{{ __('dashboard.overdue_invoices') }}
                         @if ($overdueCount > 0)
                             <span class="badge rounded-pill status-pill-danger status-badge ms-2">{{ $overdueCount }}</span>
                         @endif
@@ -91,12 +91,12 @@
                         <table class="table table-modern mb-0 table-hover">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">التأخير</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_invoice_number') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_section') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_due_date') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.delay') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_total') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_status') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,13 +107,13 @@
                                         </td>
                                         <td>{{ $invoice->section->section_name ?? '-' }}</td>
                                         <td>{{ $invoice->Due_date }}</td>
-                                        <td><span class="text-danger fw-bold">{{ abs((int) now()->diffInDays($invoice->Due_date, true)) }} يوم</span></td>
+                                        <td><span class="text-danger fw-bold">{{ abs((int) now()->diffInDays($invoice->Due_date, true)) }} {{ __('dashboard.day') }}</span></td>
                                         <td>{{ number_format($invoice->Total, 2) }}</td>
                                         <td><x-status-badge :status="$invoice->Value_Status" /></td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center text-muted py-4">لا توجد فواتير متأخرة 🎉</td>
+                                        <td colspan="6" class="text-center text-muted py-4">{{ __('dashboard.no_overdue_invoices') }}</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -126,13 +126,13 @@
         <div class="col-lg-4">
             <div class="card h-100">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0"><i class="fas fa-trophy text-warning me-2"></i>أعلى الأقسام إيرادًا</h4>
+                    <h4 class="card-title mb-0"><i class="fas fa-trophy text-warning me-2"></i>{{ __('dashboard.top_revenue_sections') }}</h4>
                 </div>
                 <div class="card-body">
                     @forelse ($topSections as $i => $row)
                         <div class="leaderboard-row">
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="leaderboard-rank">#{{ $i + 1 }} {{ $row->section->section_name ?? 'قسم محذوف' }}</span>
+                                <span class="leaderboard-rank">#{{ $i + 1 }} {{ $row->section->section_name ?? __('dashboard.deleted_section') }}</span>
                                 <strong>{{ number_format($row->revenue, 2) }}</strong>
                             </div>
                             <div class="leaderboard-bar-bg">
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                     @empty
-                        <p class="text-center text-muted py-4 mb-0">لا توجد بيانات كافية</p>
+                        <p class="text-center text-muted py-4 mb-0">{{ __('dashboard.not_enough_data') }}</p>
                     @endforelse
                 </div>
             </div>
@@ -153,7 +153,7 @@
         <div class="col-lg-7">
             <div class="card h-100">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0"><i class="fas fa-chart-line text-primary me-2"></i>اتجاه الايرادات (آخر 6 أشهر)</h4>
+                    <h4 class="card-title mb-0"><i class="fas fa-chart-line text-primary me-2"></i>{{ __('dashboard.revenue_trend') }}</h4>
                 </div>
                 <div class="card-body chart-card-body">
                     {!! $revenueTrendChart->render() !!}
@@ -164,7 +164,7 @@
         <div class="col-lg-5">
             <div class="card h-100">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0"><i class="fas fa-chart-pie text-info me-2"></i>توزيع حالات الفواتير</h4>
+                    <h4 class="card-title mb-0"><i class="fas fa-chart-pie text-info me-2"></i>{{ __('dashboard.status_distribution') }}</h4>
                 </div>
                 <div class="card-body chart-card-body">
                     <div class="donut-chart-wrap">
@@ -172,15 +172,15 @@
                     </div>
                     <div class="d-flex flex-column gap-2 status-legend-list">
                         <div class="d-flex justify-content-between align-items-center status-legend-row">
-                            <span><span class="legend-dot bg-success"></span> مدفوعة</span>
+                            <span><span class="legend-dot bg-success"></span> {{ __('status.paid') }}</span>
                             <strong>{{ $count_invoices1 }}</strong>
                         </div>
                         <div class="d-flex justify-content-between align-items-center status-legend-row">
-                            <span><span class="legend-dot bg-danger"></span> غير مدفوعة</span>
+                            <span><span class="legend-dot bg-danger"></span> {{ __('status.unpaid') }}</span>
                             <strong>{{ $count_invoices2 }}</strong>
                         </div>
                         <div class="d-flex justify-content-between align-items-center status-legend-row">
-                            <span><span class="legend-dot bg-warning"></span> مدفوعة جزئياً</span>
+                            <span><span class="legend-dot bg-warning"></span> {{ __('status.partial') }}</span>
                             <strong>{{ $count_invoices3 }}</strong>
                         </div>
                     </div>
@@ -195,19 +195,19 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0"><i class="fas fa-history text-secondary me-2"></i>أحدث الفواتير</h4>
-                    <a href="{{ url('invoices') }}" class="btn btn-sm btn-outline-primary">عرض الكل</a>
+                    <h4 class="card-title mb-0"><i class="fas fa-history text-secondary me-2"></i>{{ __('dashboard.latest_invoices') }}</h4>
+                    <a href="{{ url('invoices') }}" class="btn btn-sm btn-outline-primary">{{ __('dashboard.view_all') }}</a>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-modern mb-0 table-hover">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">تاريخ الاصدار</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_invoice_number') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_section') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_issue_date') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_total') }}</th>
+                                    <th class="border-bottom-0">{{ __('dashboard.col_status') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -223,7 +223,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center text-muted py-4">لا توجد فواتير حتى الآن</td>
+                                        <td colspan="5" class="text-center text-muted py-4">{{ __('dashboard.no_invoices_yet') }}</td>
                                     </tr>
                                 @endforelse
                             </tbody>

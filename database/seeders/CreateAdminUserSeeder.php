@@ -22,7 +22,7 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'Atef Hejazi',
             'email' => 'atefhejazi10@gmail.com',
             'password' => bcrypt('123456'),
-            'Status' => 'مفعل',
+            'Status' => 'active',
         ]);
 
 

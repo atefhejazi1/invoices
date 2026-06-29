@@ -5,7 +5,7 @@
     <!--Internal  treeview -->
     <link href="{{ URL::asset('assets/plugins/treeview/treeview-rtl.css') }}" rel="stylesheet" type="text/css" />
 @section('title')
-    تعديل الصلاحيات - مورا سوفت للادارة القانونية
+    {{ __('roles.title_edit') }}
 @stop
 @endsection
 @section('page-header')
@@ -13,8 +13,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">الصلاحيات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تعديل
-                الصلاحيات</span>
+            <h4 class="content-title mb-0 my-auto">{{ __('roles.permissions') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('roles.title_edit') }}</span>
         </div>
     </div>
 </div>
@@ -27,7 +26,7 @@
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
-        <strong>خطا</strong>
+        <strong>{{ __('roles.error') }}</strong>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -56,14 +55,14 @@
                 @foreach ($permission as $value)
                     <label><input type="checkbox" name="permission[{{ $value->id }}]" value="{{ $value->id }}"
                             class="name" {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}>
-                        {{ $value->name }}</label>
+                        {{ __('permissions.' . $value->name) }}</label>
                     <br />
                 @endforeach
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary btn-sm mb-3"><i class="fa-solid fa-floppy-disk"></i>
-                تحديث</button>
+                {{ __('roles.update') }}</button>
         </div>
     </div>
 </form>

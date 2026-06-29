@@ -33,7 +33,7 @@
                     </svg><span class="side-menu__label">{{ __('messages.home') }}</span></a>
             </li>
 
-            @can('الفواتير')
+            @can('invoices.menu')
                 <li class="side-item side-item-category">{{ __('messages.invoices') }}</li>
 
                 <li class="slide">
@@ -46,13 +46,13 @@
                         </svg><span class="side-menu__label">{{ __('messages.invoices') }}</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
 
-                        @can('قائمة الفواتير')
+                        @can('invoices.list')
 
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'invoices')) }}">{{ __('messages.invoices_list') }}</a></li>
 
                         @endcan
 
-                        @can('الفواتير المدفوعة')
+                        @can('invoices.paid')
 
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_Paid')) }}">{{ __('messages.invoices_paid') }}</a>
 
@@ -60,7 +60,7 @@
 
                         </li>
 
-                        @can('الفواتير الغير مدفوعة')
+                        @can('invoices.unpaid')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_UnPaid')) }}">{{ __('messages.invoices_unpaid') }}
                                     @php($unpaidCount = \App\Models\invoices::where('Value_Status', 2)->count())
                                     @if ($unpaidCount > 0)
@@ -70,19 +70,19 @@
                             </li>
                         @endcan
 
-                        @can('الفواتير المدفوعة')
+                        @can('invoices.paid')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_Partial')) }}">{{ __('messages.invoices_partial') }}</a>
                             </li>
                         @endcan
 
-                        @can('ارشيف الفواتير')
+                        @can('invoices.archive')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Archive')) }}">{{ __('messages.invoices_archive') }}</a></li>
                         @endcan
                     </ul>
                 </li>
             @endcan
 
-            @can('التقارير')
+            @can('reports.menu')
                 <li class="side-item side-item-category">{{ __('messages.reports') }}</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
@@ -93,12 +93,12 @@
                                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z" />
                         </svg><span class="side-menu__label">{{ __('messages.reports') }}</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        @can('تقرير الفواتير')
+                        @can('reports.invoices')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'invoices_report')) }}">{{ __('messages.invoices_report') }}</a>
                             </li>
                         @endcan
 
-                        @can('تقرير العملاء')
+                        @can('reports.customers')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'customers_report')) }}">{{ __('messages.customers_report') }}</a>
                             </li>
                         @endcan
@@ -106,7 +106,7 @@
                 </li>
             @endcan
 
-            @can('المستخدمين')
+            @can('users.menu')
                 <li class="side-item side-item-category">{{ __('messages.users') }}</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
@@ -117,18 +117,18 @@
                                 d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z" />
                         </svg><span class="side-menu__label">{{ __('messages.users') }}</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        @can('قائمة المستخدمين')
+                        @can('users.list')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">{{ __('messages.users_list') }}</a></li>
                         @endcan
 
-                        @can('صلاحيات المستخدمين')
+                        @can('roles.menu')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'roles')) }}">{{ __('messages.user_permissions') }}</a></li>
                         @endcan
                     </ul>
                 </li>
             @endcan
 
-            @can('الاعدادات')
+            @can('settings.menu')
                 <li class="side-item side-item-category">{{ __('messages.settings') }}</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
@@ -157,11 +157,11 @@
                             </g>
                         </svg><span class="side-menu__label">{{ __('messages.settings') }}</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        @can('الاقسام')
+                        @can('sections.menu')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'sections')) }}">{{ __('messages.sections') }}</a></li>
                         @endcan
 
-                        @can('المنتجات')
+                        @can('products.menu')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'products')) }}">{{ __('messages.products') }}</a></li>
                         @endcan
                     </ul>

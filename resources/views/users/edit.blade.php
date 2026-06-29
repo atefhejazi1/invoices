@@ -3,7 +3,7 @@
 <!-- Internal Nice-select css  -->
 <link href="{{URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" />
 @section('title')
-تعديل مستخدم - مورا سوفت للادارة القانونية
+{{ __('users.title_edit') }}
 @stop
 
 
@@ -13,8 +13,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">المستخدمين</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تعديل
-                مستخدم</span>
+            <h4 class="content-title mb-0 my-auto">{{ __('users.title') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('users.title_edit') }}</span>
         </div>
     </div>
 </div>
@@ -30,7 +29,7 @@
             <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <strong>خطا</strong>
+            <strong>{{ __('users.error') }}</strong>
             <ul>
                 @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -43,15 +42,22 @@
             <div class="card-body">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-right">
-                        <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}">رجوع</a>
+                        <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}">{{ __('users.back') }}</a>
                     </div>
                 </div><br>
 
-                <form method="POST" action="{{ route('users.update', $user->id) }}">
+                <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Avatar:</strong><br>
+                                <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="rounded-circle mb-2" width="60" height="60">
+                                <input type="file" name="avatar" accept="image/*" class="form-control">
+                            </div>
+                        </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>Name:</strong>

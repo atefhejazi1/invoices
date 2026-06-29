@@ -65,21 +65,21 @@ Route::group([
         Route::get('unreadNotifications', [InvoicesController::class, 'unreadNotifications'])->name('unreadNotifications');
     });
 
-    Route::middleware(['permission:عرض صلاحية'])->group(function () {
+    Route::middleware(['permission:roles.view'])->group(function () {
         Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
     });
 
-    Route::middleware(['permission:اضافة صلاحية'])->group(function () {
+    Route::middleware(['permission:roles.create'])->group(function () {
         Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
         Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
     });
 
-    Route::middleware(['permission:تعديل صلاحية'])->group(function () {
+    Route::middleware(['permission:roles.edit'])->group(function () {
         Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
         Route::put('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
     });
 
-    Route::middleware(['permission:حذف صلاحية'])->group(function () {
+    Route::middleware(['permission:roles.delete'])->group(function () {
         Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
     });
 

@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    private const ARABIC_MONTHS = [
-        'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر',
-    ];
-
     /**
      * Show the application dashboard.
      *
@@ -49,7 +44,7 @@ class HomeController extends Controller
         $trendData = [];
         for ($i = 5; $i >= 0; $i--) {
             $month = now()->subMonths($i);
-            $trendLabels[] = self::ARABIC_MONTHS[$month->month - 1];
+            $trendLabels[] = $month->locale(app()->getLocale())->translatedFormat('F');
             $trendData[] = round(
                 invoices::whereYear('invoice_Date', $month->year)
                     ->whereMonth('invoice_Date', $month->month)
@@ -62,7 +57,7 @@ class HomeController extends Controller
             ->name('statusDistributionChart')
             ->type('doughnut')
             ->size(['width' => 320, 'height' => 280])
-            ->labels(['مدفوعة', 'غير مدفوعة', 'مدفوعة جزئياً'])
+            ->labels([__('status.paid'), __('status.unpaid'), __('status.partial')])
             ->datasets([
                 [
                     'backgroundColor' => ['#1fa971', '#e5484d', '#f5a524'],
@@ -82,7 +77,7 @@ class HomeController extends Controller
             ->labels($trendLabels)
             ->datasets([
                 [
-                    'label' => 'الايرادات',
+                    'label' => __('dashboard.revenue'),
                     'backgroundColor' => 'rgba(59, 111, 224, .12)',
                     'borderColor' => '#3b6fe0',
                     'data' => $trendData,

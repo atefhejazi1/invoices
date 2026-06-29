@@ -56,7 +56,7 @@ class InvoicesController extends Controller
             'Value_VAT' => $request->Value_VAT,
             'Rate_VAT' => $request->Rate_VAT,
             'Total' => $request->Total,
-            'Status' => 'غير مدفوعة',
+            'Status' => 'unpaid',
             'Value_Status' => 2,
             'note' => $request->note,
         ]);
@@ -67,7 +67,7 @@ class InvoicesController extends Controller
             'invoice_number' => $request->invoice_number,
             'product' => $request->product,
             'Section' => $request->Section,
-            'Status' => 'غير مدفوعة',
+            'Status' => 'unpaid',
             'Value_Status' => 2,
             'note' => $request->note,
             'user' => (Auth::user()->name),
@@ -208,7 +208,7 @@ class InvoicesController extends Controller
     {
         $invoices = invoices::findOrFail($id);
 
-        if ($request->Status === 'مدفوعة') {
+        if ($request->Status === 'paid') {
 
             $invoices->update([
                 'Value_Status' => 1,

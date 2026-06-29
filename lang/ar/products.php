@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'المنتجات',
+    'settings' => 'الاعدادات',
+    'add_product' => 'اضافة منتج',
+    'edit_product' => 'تعديل منتج',
+    'delete_product' => 'حذف المنتج',
+    'edit' => 'تعديل',
+    'delete' => 'حذف',
+    'col_number' => '#',
+    'product_name' => 'اسم المنتج',
+    'section_name' => 'اسم القسم',
+    'notes' => 'ملاحظات',
+    'actions' => 'العمليات',
+    'product_name_ar' => 'اسم المنتج (عربي)',
+    'product_name_en' => 'اسم المنتج (انجليزي)',
+    'section' => 'القسم',
+    'select_section' => '--حدد القسم--',
+    'confirm' => 'تاكيد',
+    'close' => 'اغلاق',
+    'cancel' => 'الغاء',
+    'save_data' => 'تعديل البيانات',
+    'confirm_delete_question' => 'هل انت متاكد من عملية الحذف ؟',
+];
