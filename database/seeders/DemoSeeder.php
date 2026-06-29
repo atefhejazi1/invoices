@@ -8,6 +8,8 @@ use App\Models\products;
 use App\Models\sections;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 
 class DemoSeeder extends Seeder
@@ -28,6 +30,13 @@ class DemoSeeder extends Seeder
 
         if ($role) {
             $demoUser->assignRole([$role->id]);
+        }
+
+        $faceImage = public_path('assets/img/faces/9.jpg');
+        if (File::exists($faceImage)) {
+            $avatarPath = 'avatars/demo-admin.jpg';
+            Storage::disk('public')->put($avatarPath, File::get($faceImage));
+            $demoUser->update(['avatar' => $avatarPath]);
         }
 
         $sectionsData = [
