@@ -3,10 +3,13 @@
     <div class="container-fluid">
         <div class="main-header-left ">
             <div class="responsive-logo">
-                <a href="{{ route('dashboard') }}"><img src="{{ URL::asset('assets/img/brand/logo.png') }}"
-                        class="logo-1" alt="logo"></a>
-                <a href="{{ route('dashboard') }}"><img src="{{ URL::asset('assets/img/brand/favicon.png') }}"
-                        class="logo-2" alt="logo"></a>
+                <a href="{{ route('dashboard') }}" class="d-flex align-items-center logo-1">
+                    <i class="fas fa-file-invoice tx-20 mr-1"></i>
+                    <span class="font-weight-bold">{{ __('messages.app_name') }}</span>
+                </a>
+                <a href="{{ route('dashboard') }}" class="logo-2">
+                    <i class="fas fa-file-invoice tx-20"></i>
+                </a>
             </div>
             <div class="app-sidebar__toggle" data-toggle="sidebar">
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
