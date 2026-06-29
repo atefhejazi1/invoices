@@ -1,7 +1,7 @@
 @extends('layouts.master2')
 
 @section('title')
-    تسجيل الدخول - برنامج الفواتير
+    {{ __('login.page_title') }}
 @endsection
 
 
@@ -26,23 +26,23 @@
                                     <div class="mb-5 d-flex"> <a href="{{ url('/') }}"><img
                                                 src="{{ URL::asset('assets/img/brand/favicon.png') }}"
                                                 class="sign-favicon ht-40" alt="logo"></a>
-                                        <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">برنامج الفواتير </h1>
+                                        <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">{{ __('messages.app_name') }}</h1>
                                     </div>
                                     <div class="card-sigin">
                                         <div class="main-signup-header">
-                                            <h2>مرحبا بك</h2>
-                                            <h5 class="font-weight-semibold mb-4"> تسجيل الدخول</h5>
+                                            <h2>{{ __('login.welcome') }}</h2>
+                                            <h5 class="font-weight-semibold mb-4"> {{ __('login.sign_in') }}</h5>
 
                                             <div class="auth-demo-hint">
                                                 <i class="fas fa-info-circle text-primary"></i>
-                                                حساب تجريبي جاهز: <strong>admin@demo.com</strong> /
+                                                {{ __('login.demo_account_hint') }} <strong>admin@demo.com</strong> /
                                                 <strong>password</strong>
                                             </div>
 
                                             <form method="POST" action="{{ route('login') }}">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label>البريد الالكتروني</label>
+                                                    <label>{{ __('login.email') }}</label>
                                                     <input id="email" type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
                                                         name="email" value="{{ old('email', request('email')) }}" required
@@ -55,7 +55,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>كلمة المرور</label>
+                                                    <label>{{ __('login.password') }}</label>
 
                                                     <input id="password" type="password"
                                                         class="form-control @error('password') is-invalid @enderror"
@@ -74,14 +74,14 @@
                                                                     {{ old('remember') ? 'checked' : '' }}>
                                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                 <label class="form-check-label" for="remember">
-                                                                    {{ __('تذكرني') }}
+                                                                    {{ __('login.remember_me') }}
                                                                 </label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-main-primary btn-block">
-                                                    {{ __('تسجيل الدخول') }}
+                                                    {{ __('login.sign_in') }}
                                                 </button>
                                             </form>
                                         </div>
@@ -96,12 +96,12 @@
             <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex p-0">
                 <div class="auth-brand-panel w-100">
                     <div>
-                        <h2 class="mb-3">نظام متكامل لإدارة فواتيرك</h2>
-                        <p class="mb-0" style="opacity:.85">فواتير، تقارير، صلاحيات، وكل ما تحتاجه من لوحة واحدة.</p>
+                        <h2 class="mb-3">{{ __('login.brand_panel_title') }}</h2>
+                        <p class="mb-0" style="opacity:.85">{{ __('login.brand_panel_subtitle') }}</p>
                         <ul class="auth-feature-list">
-                            <li><i class="fas fa-receipt"></i> إدارة كاملة للفواتير وحالات الدفع</li>
-                            <li><i class="fas fa-shield-alt"></i> صلاحيات وأدوار دقيقة لكل مستخدم</li>
-                            <li><i class="fas fa-chart-line"></i> تقارير وتصدير فوري للبيانات</li>
+                            <li><i class="fas fa-receipt"></i> {{ __('login.brand_feature_invoices') }}</li>
+                            <li><i class="fas fa-shield-alt"></i> {{ __('login.brand_feature_roles') }}</li>
+                            <li><i class="fas fa-chart-line"></i> {{ __('login.brand_feature_reports') }}</li>
                         </ul>
                     </div>
                 </div>

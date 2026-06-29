@@ -92,4 +92,8 @@ return [
     'col_index' => 'م',
     'delete' => 'حذف',
     'select_payment_status' => '-- حدد حالة الدفع --',
+
+    'title_print' => 'معاينه طباعة الفاتورة',
+    'invoice_collection_title' => 'فاتورة تحصيل',
+    'print' => 'طباعة',
 ];

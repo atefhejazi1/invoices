@@ -43,6 +43,8 @@ return [
     'customers_report' => 'Customers report',
     'users_list' => 'Users list',
     'user_permissions' => 'User permissions',
+    'notifications' => 'Notifications',
+    'mark_all_read' => 'Mark all as read',
 
     'landing_meta_title' => 'Invoice Manager - A complete invoice management system',
     'landing_meta_description' => 'A production-ready invoice management system, built with Laravel',

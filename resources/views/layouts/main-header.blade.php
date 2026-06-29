@@ -75,9 +75,9 @@
                         <div class="dropdown-menu">
                             <div class="menu-header-content bg-primary text-right">
                                 <div class="d-flex">
-                                    <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الاشعارات</h6>
+                                    <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">{{ __('messages.notifications') }}</h6>
                                     <span class="badge badge-pill badge-warning mr-auto my-auto float-left"><a
-                                            href="\MarkAsRead_all">تعين قراءة الكل</a></span>
+                                            href="{{ route('MarkAsRead_all') }}">{{ __('messages.mark_all_read') }}</a></span>
                                 </div>
                                 <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">
                                 <h6 style="color: yellow" id="notifications_count">

@@ -92,4 +92,8 @@ return [
     'col_index' => '#',
     'delete' => 'Delete',
     'select_payment_status' => '-- Select Payment Status --',
+
+    'title_print' => 'Invoice Print Preview',
+    'invoice_collection_title' => 'Collection Invoice',
+    'print' => 'Print',
 ];

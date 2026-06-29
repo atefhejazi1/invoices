@@ -4,6 +4,8 @@ return [
     'title' => 'User Permissions',
     'title_add' => 'Add Permission',
     'title_edit' => 'Edit Permissions',
+    'title_view' => 'View Permissions',
+    'back' => 'Back',
     'users' => 'Users',
     'permissions' => 'Permissions',
     'add_user_type' => 'Add User Type',

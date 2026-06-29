@@ -43,6 +43,8 @@ return [
     'customers_report' => 'تقارير العملاء',
     'users_list' => 'قائمة المستخدمين',
     'user_permissions' => 'صلاحيات المستخدمين',
+    'notifications' => 'الاشعارات',
+    'mark_all_read' => 'تعين قراءة الكل',
 
     'landing_meta_title' => 'برنامج الفواتير - نظام إدارة فواتير متكامل',
     'landing_meta_description' => 'نظام إدارة فواتير جاهز للإنتاج، مبني بـ Laravel',
