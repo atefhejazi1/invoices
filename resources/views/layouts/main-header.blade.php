@@ -122,13 +122,11 @@
                         </svg></a>
                 </div>
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
-                    <a class="profile-user d-flex" href=""><img alt=""
-                            src="{{ Auth::user()->avatar_url }}"></a>
+                    <a class="profile-user d-flex" href=""><x-avatar :user="Auth::user()" /></a>
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
-                                <div class="main-img-user"><img alt=""
-                                        src="{{ Auth::user()->avatar_url }}" class=""></div>
+                                <div class="main-img-user"><x-avatar :user="Auth::user()" width="100%" height="100%" /></div>
                                 <div class="mr-3 my-auto">
                                     <h6>{{ Auth::user()->name }}</h6><span>{{ Auth::user()->email }}</span>
                                 </div>

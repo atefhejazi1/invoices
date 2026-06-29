@@ -54,7 +54,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>Avatar:</strong><br>
-                                <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="rounded-circle mb-2" width="60" height="60">
+                                <x-avatar :user="$user" class="rounded-circle mb-2" width="60" height="60" />
                                 <input type="file" name="avatar" accept="image/*" class="form-control">
                             </div>
                         </div>

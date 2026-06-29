@@ -50,17 +50,30 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Real uploaded avatar if set, else deterministic placeholder (theme ships faces 1.jpg..17.jpg).
-     */
-    public function getAvatarUrlAttribute(): string
+    private const AVATAR_PALETTE = [
+        '#6c5ce7', '#00b894', '#0984e3', '#e17055',
+        '#fdcb6e', '#d63031', '#00cec9', '#e84393',
+    ];
+
+    public function getAvatarUrlAttribute(): ?string
     {
-        if ($this->avatar) {
-            return asset('storage/' . $this->avatar);
-        }
+        return $this->avatar ? asset('storage/' . $this->avatar) : null;
+    }
 
-        $face = ($this->id % 17) + 1;
+    /**
+     * First two letters of the name, shown when no avatar is uploaded.
+     */
+    public function getInitialsAttribute(): string
+    {
+        $name = trim((string) $this->name);
 
-        return asset("assets/img/faces/{$face}.jpg");
+        return $name === '' ? '?' : mb_strtoupper(mb_substr($name, 0, 2));
+    }
+
+    public function getAvatarColorAttribute(): string
+    {
+        $index = crc32($this->name ?? '') % count(self::AVATAR_PALETTE);
+
+        return self::AVATAR_PALETTE[$index];
     }
 }

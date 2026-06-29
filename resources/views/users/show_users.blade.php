@@ -65,7 +65,7 @@
                             @foreach ($data as $key => $user)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td><img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="rounded-circle" width="40" height="40"></td>
+                                    <td><x-avatar :user="$user" class="rounded-circle" width="40" height="40" /></td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
